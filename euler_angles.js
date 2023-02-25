@@ -83,40 +83,8 @@ function degToRad(angle_deg) {
 }
 
 // Define events for textboxes.
-document
-  .querySelector("#intrinsic-zyx .a")
-  .addEventListener("input", function (event) {
-    const a_rad = degToRad(event.currentTarget.value);
-    if (isNaN(a_rad) == false) {
-      const euler_angles = frame.rotation.reorder("ZYX");
-      const b_rad = euler_angles.y;
-      const c_rad = euler_angles.z;
-      frame.rotation.set(a_rad, b_rad, c_rad, "ZYX");
-    }
-  });
-document
-  .querySelector("#intrinsic-zyx .b")
-  .addEventListener("input", function (event) {
-    const b_rad = degToRad(event.currentTarget.value);
-    if (isNaN(b_rad) == false) {
-      const euler_angles = frame.rotation.reorder("ZYX");
-      const a_rad = euler_angles.x;
-      const c_rad = euler_angles.z;
-      frame.rotation.set(a_rad, b_rad, c_rad, "ZYX");
-    }
-  });
-document
-  .querySelector("#intrinsic-zyx .c")
-  .addEventListener("input", function (event) {
-    const c_rad = degToRad(event.currentTarget.value);
-    if (isNaN(c_rad) == false) {
-      const euler_angles = frame.rotation.reorder("ZYX");
-      const a_rad = euler_angles.x;
-      const b_rad = euler_angles.y;
-      frame.rotation.set(a_rad, b_rad, c_rad, "ZYX");
-    }
-  });
 
+addEventListenersToTextBoxes("zyx");
 addEventListenersToTextBoxes("xyz");
 
 /**
