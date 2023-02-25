@@ -1,0 +1,29 @@
+body {
+    font-family: arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    width: 1100px;
+    height: 600px;
+}
+
+#sidebar {
+    padding: 10px;
+    background-color: moccasin;
+    width: 400px;
+}
+
+#canvasContainer {
+    display: flex;
+    flex-grow: 1;
+    width: 50%;
+}
+
+#canvas {
+    flex: 1 1 auto;
+}
+
+.angle {
+    width: 60px;
+}
