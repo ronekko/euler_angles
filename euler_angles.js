@@ -205,7 +205,8 @@ transform_controls.addEventListener("dragging-changed", function (event) {
 function radToFormettedDeg(angle_rad) {
   const angle_deg = (180.0 * angle_rad) / Math.PI;
   const angle_deg_str = angle_deg.toFixed(2);
-  return angle_deg_str == "-0.00" ? "0.00" : angle_deg_str;
+  const sign_fixed = angle_deg_str == "-0.00" ? "0.00" : angle_deg_str;
+  return sign_fixed.replace(/.00$/, '');  // If integer then remove fractional portion.
 }
 
 function render() {
