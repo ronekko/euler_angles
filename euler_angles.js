@@ -14,7 +14,7 @@ camera.lookAt(look_at_vector);
 
 // Create a scene
 const scene = new THREE.Scene();
-scene.add(createWorldCoordinateFrame());
+scene.add(objects.createWorldCoordinateFrame());
 
 // Add ambient light.
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -26,7 +26,7 @@ directionalLight.position.set(10, 10, 10);
 scene.add(directionalLight);
 
 // Create the coordinate frame to be rotated.
-const frame = createCoordinateFrame();
+const frame = objects.createCoordinateFrame();
 scene.add(frame);
 
 // Create a renderer
@@ -58,7 +58,7 @@ function radToFormattedDeg(angle_rad) {
   const angle_deg = (180.0 * angle_rad) / Math.PI;
   const angle_deg_str = angle_deg.toFixed(2);
   const sign_fixed = angle_deg_str == "-0.00" ? "0.00" : angle_deg_str;
-  return sign_fixed.replace(/.00$/, '');  // If integer then remove fractional portion.
+  return sign_fixed.replace(/.00$/, ""); // If integer then remove fractional portion.
 }
 
 function render() {
