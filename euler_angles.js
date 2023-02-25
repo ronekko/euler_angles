@@ -61,31 +61,9 @@ function radToFormattedDeg(angle_rad) {
   return sign_fixed.replace(/.00$/, ""); // If integer then remove fractional portion.
 }
 
-function render() {
-  renderer.render(scene, camera);
-}
-
-// Render the scene
-function animate() {
-  requestAnimationFrame(animate);
-
-  updateTexts("zyx");
-
-  updateTexts("xyz");
-
-  camera_controls.update(); // Update the OrbitControls
-  render();
-}
-animate();
-
 function degToRad(angle_deg) {
   return (Math.PI * Number(angle_deg)) / 180.0;
 }
-
-// Define events for textboxes.
-
-addEventListenersToTextBoxes("zyx");
-addEventListenersToTextBoxes("xyz");
 
 /**
  *
@@ -168,3 +146,25 @@ function addEventListenersToTextBoxes(euler_angles_order) {
       }
     });
 }
+
+function render() {
+  renderer.render(scene, camera);
+}
+
+// Render the scene
+function animate() {
+  requestAnimationFrame(animate);
+
+  updateTexts("zyx");
+
+  updateTexts("xyz");
+
+  camera_controls.update(); // Update the OrbitControls
+  render();
+}
+animate();
+
+// Define events for text boxes.
+
+addEventListenersToTextBoxes("zyx");
+addEventListenersToTextBoxes("xyz");
