@@ -69,9 +69,9 @@ function render() {
 function animate() {
   requestAnimationFrame(animate);
 
-  updateTexts("ZYX");
+  updateTexts("zyx");
 
-  updateTexts("XYZ");
+  updateTexts("xyz");
 
   camera_controls.update(); // Update the OrbitControls
   render();
@@ -84,7 +84,7 @@ function degToRad(angle_deg) {
 
 // Define events for textboxes.
 document
-  .querySelector("#intrinsic-ZYX .a")
+  .querySelector("#intrinsic-zyx .a")
   .addEventListener("input", function (event) {
     const a_rad = degToRad(event.currentTarget.value);
     if (isNaN(a_rad) == false) {
@@ -95,7 +95,7 @@ document
     }
   });
 document
-  .querySelector("#intrinsic-ZYX .b")
+  .querySelector("#intrinsic-zyx .b")
   .addEventListener("input", function (event) {
     const b_rad = degToRad(event.currentTarget.value);
     if (isNaN(b_rad) == false) {
@@ -106,7 +106,7 @@ document
     }
   });
 document
-  .querySelector("#intrinsic-ZYX .c")
+  .querySelector("#intrinsic-zyx .c")
   .addEventListener("input", function (event) {
     const c_rad = degToRad(event.currentTarget.value);
     if (isNaN(c_rad) == false) {
@@ -122,8 +122,9 @@ document
  * @param {String} euler_angles_order - order of rotation axes, e.g., "zyx" or "xzx".
  */
 function updateTexts(euler_angles_order) {
-  // Intrinsic-ZYX.
-  const euler_angles = frame.rotation.clone().reorder(euler_angles_order);
+  const euler_angles = frame.rotation
+    .clone()
+    .reorder(euler_angles_order.toUpperCase());
   const a = radToFormattedDeg(euler_angles.x);
   const b = radToFormattedDeg(euler_angles.y);
   const c = radToFormattedDeg(euler_angles.z);
