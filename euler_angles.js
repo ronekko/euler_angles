@@ -25,6 +25,7 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(10, 10, 10);
 scene.add(directionalLight);
 
+// Create the coordinate frame to be rotated.
 const frame = createCoordinateFrame();
 scene.add(frame);
 
