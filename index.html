@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>3D Object Manipulation</title>
+    <style>
+      body {
+        font-family: arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        width: 1100px;
+        height: 600px;
+      }
+      #sidebar {
+        padding: 10px;
+        background-color: moccasin;
+        width: 400px;
+      }
+      #canvasContainer {
+        display: flex;
+        flex-grow: 1;
+        width: 50%;
+      }
+      #canvas {
+        flex: 1 1 auto;
+      }
+      .angle {
+        width: 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="sidebar">
+      <div id="euler-angles">
+        <div id="intrinsic-ZYX">
+          Intrinsic-ZYX: <span class="tuple">(0_deg, 0_deg, 0_deg)</span>
+          <p>
+            A: <input type="number" class="angle a" /> B:
+            <input type="number" class="angle b" /> C:
+            <input type="number" class="angle c" />
+          </p>
+        </div>
+
+        <div id="intrinsic-XYZ">
+          Intrinsic-XYZ: <span class="tuple">(0_deg, 0_deg, 0_deg)</span>
+          <p>
+            A: <input type="number" class="angle a" /> B:
+            <input type="number" class="angle b" /> C:
+            <input type="number" class="angle c" />
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="canvasContainer">
+      <canvas id="canvas"></canvas>
+      <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
+      <script src="https://unpkg.com/three@0.147.0/examples/js/controls/TransformControls.js"></script>
+      <script src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+      <script src="euler_angles.js"></script>
+    </div>
+  </body>
+</html>
