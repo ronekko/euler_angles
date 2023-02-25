@@ -16,7 +16,7 @@ camera.lookAt(look_at_vector);
 const scene = new THREE.Scene();
 scene.add(createWorldCoordinateFrame());
 
-// Add amibient light.
+// Add ambient light.
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
@@ -53,7 +53,7 @@ transform_controls.addEventListener("dragging-changed", function (event) {
   camera_controls.enabled = !event.value;
 });
 
-function radToFormettedDeg(angle_rad) {
+function radToFormattedDeg(angle_rad) {
   const angle_deg = (180.0 * angle_rad) / Math.PI;
   const angle_deg_str = angle_deg.toFixed(2);
   const sign_fixed = angle_deg_str == "-0.00" ? "0.00" : angle_deg_str;
@@ -123,9 +123,9 @@ document
 function updateTexts(euler_angles_order) {
   // Intrinsic-ZYX.
   const euler_angles = frame.rotation.clone().reorder(euler_angles_order);
-  const a = radToFormettedDeg(euler_angles.x);
-  const b = radToFormettedDeg(euler_angles.y);
-  const c = radToFormettedDeg(euler_angles.z);
+  const a = radToFormattedDeg(euler_angles.x);
+  const b = radToFormattedDeg(euler_angles.y);
+  const c = radToFormattedDeg(euler_angles.z);
   const div_id = `#intrinsic-${euler_angles_order}`;
   const tuple = `(${a}_deg, ${b}_deg, ${c}_deg)`;
   document.querySelector(`${div_id} .tuple`).textContent = tuple;
