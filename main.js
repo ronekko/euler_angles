@@ -54,11 +54,15 @@ transform_controls.addEventListener("dragging-changed", function (event) {
   camera_controls.enabled = !event.value;
 });
 
+function formatNumber(number) {
+  const fixed_point = number.toFixed(2);
+  const sign_corrected = fixed_point == "-0.00" ? "0.00" : fixed_point;
+  return sign_corrected.replace(/.00$/, ""); // If integer then remove fractional portion.
+}
+
 function radToFormattedDeg(angle_rad) {
   const angle_deg = (180.0 * angle_rad) / Math.PI;
-  const angle_deg_str = angle_deg.toFixed(2);
-  const sign_fixed = angle_deg_str == "-0.00" ? "0.00" : angle_deg_str;
-  return sign_fixed.replace(/.00$/, ""); // If integer then remove fractional portion.
+  return formatNumber(angle_deg);
 }
 
 function degToRad(angle_deg) {
@@ -147,6 +151,124 @@ function addEventListenersToTextBoxes(euler_angles_order) {
     });
 }
 
+/**
+ *
+ * @param {THREE.Quaternion} q
+ * @returns
+ */
+function quaternionToRotationVector(q) {
+  const angle_rad = 2 * Math.acos(q.w);
+  const rotation_axis = new THREE.Vector3().set(q.x, q.y, q.z);
+  if (Math.abs(angle_rad) > 0.0001) {
+    const sin = Math.sin(angle_rad / 2);
+    rotation_axis.divideScalar(sin);
+  }
+  return rotation_axis.multiplyScalar(angle_rad);
+}
+
+function updateTextOfRotationVector() {
+  const rotation_vector = quaternionToRotationVector(frame.quaternion);
+  const a_deg = radToFormattedDeg(rotation_vector.x);
+  const b_deg = radToFormattedDeg(rotation_vector.y);
+  const c_deg = radToFormattedDeg(rotation_vector.z);
+  const a_rad = formatNumber(rotation_vector.x);
+  const b_rad = formatNumber(rotation_vector.y);
+  const c_rad = formatNumber(rotation_vector.z);
+  const div_id = "#rotation-vector";
+  const tuple = `(${a_deg}_deg, ${b_deg}_deg, ${c_deg}_deg), (${a_rad}_rad, ${b_rad}_rad, ${c_rad}_rad)`;
+  document.querySelector(`${div_id} .tuple`).textContent = tuple;
+  document.querySelector(`${div_id} .a`).value = a_deg;
+  document.querySelector(`${div_id} .b`).value = b_deg;
+  document.querySelector(`${div_id} .c`).value = c_deg;
+}
+
+function addEventListenersToTextBoxesOfRotationVector() {
+  document
+    .querySelector(`#rotation-vector .a`)
+    .addEventListener("input", function (event) {
+      const a_rad = degToRad(event.currentTarget.value);
+      const b_rad = degToRad(
+        document.querySelector("#rotation-vector .b").value
+      );
+      const c_rad = degToRad(
+        document.querySelector("#rotation-vector .c").value
+      );
+      if (
+        isNaN(a_rad) == false &&
+        isNaN(b_rad) == false &&
+        isNaN(c_rad) == false
+      ) {
+        const angle_rad = Math.sqrt(
+          a_rad * a_rad + b_rad * b_rad + c_rad * c_rad
+        );
+
+        const rotation_axis =
+          angle_rad == 0.0
+            ? new TREE.Vector3()
+            : new THREE.Vector3(a_rad, b_rad, c_rad).divideScalar(angle_rad);
+
+        frame.setRotationFromAxisAngle(rotation_axis, angle_rad);
+      }
+    });
+
+  document
+    .querySelector(`#rotation-vector .b`)
+    .addEventListener("input", function (event) {
+      const a_rad = degToRad(
+        document.querySelector("#rotation-vector .a").value
+      );
+      const b_rad = degToRad(event.currentTarget.value);
+      const c_rad = degToRad(
+        document.querySelector("#rotation-vector .c").value
+      );
+      if (
+        isNaN(a_rad) == false &&
+        isNaN(b_rad) == false &&
+        isNaN(c_rad) == false
+      ) {
+        const angle_rad = Math.sqrt(
+          a_rad * a_rad + b_rad * b_rad + c_rad * c_rad
+        );
+
+        const rotation_axis =
+          angle_rad == 0.0
+            ? new TREE.Vector3()
+            : new THREE.Vector3(a_rad, b_rad, c_rad).divideScalar(angle_rad);
+
+        frame.setRotationFromAxisAngle(rotation_axis, angle_rad);
+      }
+    });
+
+  document
+    .querySelector(`#rotation-vector .c`)
+    .addEventListener("input", function (event) {
+      const a_rad = degToRad(
+        document.querySelector("#rotation-vector .a").value
+      );
+      const b_rad = degToRad(
+        document.querySelector("#rotation-vector .b").value
+      );
+      const c_rad = degToRad(event.currentTarget.value);
+
+      if (
+        isNaN(a_rad) == false &&
+        isNaN(b_rad) == false &&
+        isNaN(c_rad) == false
+      ) {
+        const angle_rad = Math.sqrt(
+          a_rad * a_rad + b_rad * b_rad + c_rad * c_rad
+        );
+
+        const rotation_axis =
+          angle_rad == 0.0
+            ? new TREE.Vector3()
+            : new THREE.Vector3(a_rad, b_rad, c_rad).divideScalar(angle_rad);
+
+        frame.setRotationFromAxisAngle(rotation_axis, angle_rad);
+      }
+    });
+}
+
 function render() {
   renderer.render(scene, camera);
 }
@@ -156,8 +278,8 @@ function animate() {
   requestAnimationFrame(animate);
 
   updateTexts("zyx");
-
   updateTexts("xyz");
+  updateTextOfRotationVector();
 
   camera_controls.update(); // Update the OrbitControls
   render();
@@ -168,3 +290,4 @@ animate();
 
 addEventListenersToTextBoxes("zyx");
 addEventListenersToTextBoxes("xyz");
+addEventListenersToTextBoxesOfRotationVector();
