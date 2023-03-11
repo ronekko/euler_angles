@@ -16,11 +16,6 @@ function degToRad(angle_deg) {
 }
 
 class EulerAngles extends React.Component {
-  constructor(props) {
-    super(props);
-    this.frame = props.frame;
-  }
-
   handleChangeA = (event) => {
     this.setState({ value: event.target.value });
 
