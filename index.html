@@ -9,25 +9,7 @@
   <body>
     <div id="sidebar">
       <!-- Euler angles. -->
-      <div id="euler-angles">
-        <div id="intrinsic-zyx">
-          Intrinsic-ZYX: <span class="tuple">(0_deg, 0_deg, 0_deg)</span>
-          <p>
-            A: <input type="number" class="angle a" /> B:
-            <input type="number" class="angle b" /> C:
-            <input type="number" class="angle c" />
-          </p>
-        </div>
-
-        <div id="intrinsic-xyz">
-          Intrinsic-XYZ: <span class="tuple">(0_deg, 0_deg, 0_deg)</span>
-          <p>
-            A: <input type="number" class="angle a" /> B:
-            <input type="number" class="angle b" /> C:
-            <input type="number" class="angle c" />
-          </p>
-        </div>
-      </div>
+      <div id="euler-angles-container"></div>
 
       <!-- Rotation vector representation. -->
       <div id="rotation-vector">
@@ -44,10 +26,24 @@
       <canvas id="canvas"></canvas>
     </div>
 
+    <!-- Load Three.js. -->
     <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three@0.147.0/examples/js/controls/TransformControls.js"></script>
     <script src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="lib/objects.js"></script>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <script src="modules/objects.js"></script>
+    <script src="modules/EulerAngles.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
