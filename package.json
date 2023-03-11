@@ -1,0 +1,24 @@
+{
+  "name": "euler_angles",
+  "version": "1.0.0",
+  "description": "A simple visualization tool of the Euler angles.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronekko/euler_angles.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronekko/euler_angles/issues"
+  },
+  "homepage": "https://github.com/ronekko/euler_angles#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}
