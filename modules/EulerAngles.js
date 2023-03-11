@@ -26,12 +26,18 @@ function degToRad(angle_deg) {
 var EulerAngles = function (_React$Component) {
   _inherits(EulerAngles, _React$Component);
 
-  function EulerAngles(props) {
+  function EulerAngles() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, EulerAngles);
 
-    var _this = _possibleConstructorReturn(this, (EulerAngles.__proto__ || Object.getPrototypeOf(EulerAngles)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.handleChangeA = function (event) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EulerAngles.__proto__ || Object.getPrototypeOf(EulerAngles)).call.apply(_ref, [this].concat(args))), _this), _this.handleChangeA = function (event) {
       _this.setState({ value: event.target.value });
 
       var order = _this.props.order.toUpperCase();
@@ -43,9 +49,7 @@ var EulerAngles = function (_React$Component) {
         var c_rad = euler_angles.z;
         frame.rotation.set(a_rad, b_rad, c_rad, order);
       }
-    };
-
-    _this.handleChangeB = function (event) {
+    }, _this.handleChangeB = function (event) {
       _this.setState({ value: event.target.value });
 
       var order = _this.props.order.toUpperCase();
@@ -57,9 +61,7 @@ var EulerAngles = function (_React$Component) {
         var c_rad = euler_angles.z;
         frame.rotation.set(a_rad, b_rad, c_rad, order);
       }
-    };
-
-    _this.handleChangeC = function (event) {
+    }, _this.handleChangeC = function (event) {
       _this.setState({ value: event.target.value });
 
       var order = _this.props.order.toUpperCase();
@@ -71,10 +73,7 @@ var EulerAngles = function (_React$Component) {
         var b_rad = euler_angles.y;
         frame.rotation.set(a_rad, b_rad, c_rad, order);
       }
-    };
-
-    _this.frame = props.frame;
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(EulerAngles, [{
