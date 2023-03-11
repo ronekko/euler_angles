@@ -1,3 +1,5 @@
+"use strict";
+
 function formatNumber(number) {
   const fixed_point = number.toFixed(2);
   const sign_corrected = fixed_point == "-0.00" ? "0.00" : fixed_point;
@@ -93,5 +95,3 @@ class EulerAngles extends React.Component {
     );
   }
 }
-
-export { EulerAngles };

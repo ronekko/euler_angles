@@ -1,4 +1,4 @@
-import { EulerAngles } from "./modules/EulerAngles.js";
+"use strict";
 
 // Create a camera
 const canvas_element = document.querySelector("#canvasContainer");
