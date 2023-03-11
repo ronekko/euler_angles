@@ -9,25 +9,7 @@
   <body>
     <div id="sidebar">
       <!-- Euler angles. -->
-      <div id="euler-angles">
-        <div id="intrinsic-zyx">
-          Intrinsic-ZYX: <span class="tuple">(0_deg, 0_deg, 0_deg)</span>
-          <p>
-            A: <input type="number" class="angle a" /> B:
-            <input type="number" class="angle b" /> C:
-            <input type="number" class="angle c" />
-          </p>
-        </div>
-
-        <div id="intrinsic-xyz">
-          Intrinsic-XYZ: <span class="tuple">(0_deg, 0_deg, 0_deg)</span>
-          <p>
-            A: <input type="number" class="angle a" /> B:
-            <input type="number" class="angle b" /> C:
-            <input type="number" class="angle c" />
-          </p>
-        </div>
-      </div>
+      <div id="euler-angles-container"></div>
 
       <!-- Rotation vector representation. -->
       <div id="rotation-vector">
@@ -61,6 +43,7 @@
     ></script>
 
     <script src="modules/objects.js"></script>
-    <script src="main.js"></script>
+    <script type="module" src="modules/EulerAngles.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

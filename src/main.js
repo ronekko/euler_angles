@@ -1,3 +1,5 @@
+import { EulerAngles } from "./modules/EulerAngles.js";
+
 // Create a camera
 const canvas_element = document.querySelector("#canvasContainer");
 
@@ -274,15 +276,27 @@ function render() {
 }
 
 // Render the scene
+const root = ReactDOM.createRoot(
+  document.querySelector("#euler-angles-container")
+);
+function Indicator(props) {
+  return (
+    <div>
+      <EulerAngles order="zyx" frame={props.frame} />
+      <EulerAngles order="xyz" frame={props.frame} />
+    </div>
+  );
+}
+
 function animate() {
   requestAnimationFrame(animate);
 
-  updateTexts("zyx");
-  updateTexts("xyz");
-  updateTextOfRotationVector();
-
   camera_controls.update(); // Update the OrbitControls
   render();
+
+  // Update the indicator.
+  root.render(<Indicator frame={frame} />);
+  updateTextOfRotationVector();
 }
 animate();
 
