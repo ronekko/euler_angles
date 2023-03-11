@@ -73,88 +73,6 @@ function degToRad(angle_deg) {
 
 /**
  *
- * @param {String} euler_angles_order - order of rotation axes, e.g., "zyx" or "xzx".
- */
-function updateTexts(euler_angles_order) {
-  const euler_angles = frame.rotation
-    .clone()
-    .reorder(euler_angles_order.toUpperCase());
-  const a = radToFormattedDeg(euler_angles.x);
-  const b = radToFormattedDeg(euler_angles.y);
-  const c = radToFormattedDeg(euler_angles.z);
-  const div_id = `#intrinsic-${euler_angles_order}`;
-  const tuple = `(${a}_deg, ${b}_deg, ${c}_deg)`;
-  document.querySelector(`${div_id} .tuple`).textContent = tuple;
-  document.querySelector(`${div_id} .a`).value = a;
-  document.querySelector(`${div_id} .b`).value = b;
-  document.querySelector(`${div_id} .c`).value = c;
-}
-
-/**
- *
- * @param {String} euler_angles_order - order of rotation axes, e.g., "zyx" or "xzx".
- */
-function addEventListenersToTextBoxes(euler_angles_order) {
-  document
-    .querySelector(`#intrinsic-${euler_angles_order} .a`)
-    .addEventListener("input", function (event) {
-      const a_rad = degToRad(event.currentTarget.value);
-      if (isNaN(a_rad) == false) {
-        const euler_angles = frame.rotation.reorder(
-          euler_angles_order.toUpperCase()
-        );
-        const b_rad = euler_angles.y;
-        const c_rad = euler_angles.z;
-        frame.rotation.set(
-          a_rad,
-          b_rad,
-          c_rad,
-          euler_angles_order.toUpperCase()
-        );
-      }
-    });
-
-  document
-    .querySelector(`#intrinsic-${euler_angles_order} .b`)
-    .addEventListener("input", function (event) {
-      const b_rad = degToRad(event.currentTarget.value);
-      if (isNaN(b_rad) == false) {
-        const euler_angles = frame.rotation.reorder(
-          euler_angles_order.toUpperCase()
-        );
-        const a_rad = euler_angles.x;
-        const c_rad = euler_angles.z;
-        frame.rotation.set(
-          a_rad,
-          b_rad,
-          c_rad,
-          euler_angles_order.toUpperCase()
-        );
-      }
-    });
-
-  document
-    .querySelector(`#intrinsic-${euler_angles_order} .c`)
-    .addEventListener("input", function (event) {
-      const c_rad = degToRad(event.currentTarget.value);
-      if (isNaN(c_rad) == false) {
-        const euler_angles = frame.rotation.reorder(
-          euler_angles_order.toUpperCase()
-        );
-        const a_rad = euler_angles.x;
-        const b_rad = euler_angles.y;
-        frame.rotation.set(
-          a_rad,
-          b_rad,
-          c_rad,
-          euler_angles_order.toUpperCase()
-        );
-      }
-    });
-}
-
-/**
- *
  * @param {THREE.Quaternion} q
  * @returns
  */
@@ -301,7 +219,4 @@ function animate() {
 animate();
 
 // Define events for text boxes.
-
-addEventListenersToTextBoxes("zyx");
-addEventListenersToTextBoxes("xyz");
 addEventListenersToTextBoxesOfRotationVector();
